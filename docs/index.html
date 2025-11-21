@@ -6,6 +6,28 @@
     <title>Rajdeep Rai - Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #f8f4e9;
+            --card-bg: #fffdf7;
+            --text-color: #1a1a1a;
+            --text-muted: #555;
+            --link-color: #1a5276;
+            --border-color: #d4c9a8;
+            --accent-color: #8b4513;
+            --code-bg: #f0ebe0;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --card-bg: #242424;
+            --text-color: #e0d8c8;
+            --text-muted: #a89f8a;
+            --link-color: #6db3d9;
+            --border-color: #3a3a3a;
+            --accent-color: #d4a574;
+            --code-bg: #2a2a2a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,498 +35,458 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333333;
+            font-family: 'Latin Modern Roman', 'Computer Modern', 'Georgia', 'Times New Roman', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
             padding: 20px;
-            min-height: 100vh;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .theme-toggle:hover {
+            opacity: 1;
         }
 
         .container {
             display: flex;
-            gap: 30px;
-            max-width: 1400px;
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .sidebar {
-            width: 320px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 40px 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px 25px;
+            text-align: center;
             position: sticky;
             top: 20px;
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            background: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+            font-size: 50px;
+            margin: 0 auto 20px;
         }
 
-        .name {
-            font-size: 26px;
-            font-weight: 600;
+        .sidebar .name {
+            font-size: 1.5em;
+            font-weight: normal;
+            letter-spacing: 0.03em;
             margin-bottom: 8px;
-            text-align: center;
-            color: #1a1a1a;
         }
 
-        .role {
-            color: #666666;
-            font-size: 14px;
-            margin-bottom: 30px;
-            text-align: center;
-            background-color: #f9f9f9;
-            padding: 8px 20px;
-            border-radius: 6px;
+        .sidebar .role {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 25px;
+            padding: 6px 12px;
+            background: var(--code-bg);
+            display: inline-block;
         }
 
         .divider {
-            width: 100%;
             height: 1px;
-            background-color: #e5e5e5;
-            margin: 25px 0;
-        }
-
-        .contact-info {
-            width: 100%;
+            background: var(--border-color);
+            margin: 20px 0;
         }
 
         .contact-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 25px;
-            gap: 15px;
+            gap: 12px;
+            margin-bottom: 18px;
+            text-align: left;
         }
 
         .contact-item i {
-            width: 45px;
-            height: 45px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            background: var(--code-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #10B981;
-            font-size: 18px;
+            color: var(--accent-color);
             flex-shrink: 0;
         }
 
-        .contact-item-content {
-            flex: 1;
-        }
-
         .contact-item .label {
-            color: #999999;
-            font-size: 10px;
+            font-size: 0.7em;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--text-muted);
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 2px;
         }
 
         .contact-item .value {
-            color: #333333;
-            font-size: 14px;
+            font-size: 0.9em;
             word-break: break-word;
-            line-height: 1.4;
         }
 
         .social-links {
             display: flex;
+            justify-content: center;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            background: var(--code-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666666;
+            color: var(--text-muted);
             text-decoration: none;
             transition: all 0.3s;
         }
 
         .social-links a:hover {
-            background-color: #10B981;
-            color: #ffffff;
-            transform: translateY(-2px);
+            background: var(--accent-color);
+            color: var(--card-bg);
         }
 
         .main-content {
             flex: 1;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 60px 70px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            min-height: 100vh;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px 50px;
         }
 
         .page-title {
-            font-size: 36px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            position: relative;
-            padding-bottom: 15px;
-            color: #1a1a1a;
+            font-size: 2em;
+            font-weight: normal;
+            margin-bottom: 10px;
+            letter-spacing: 0.03em;
         }
 
-        .page-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
+        .title-underline {
+            width: 100%;
             height: 3px;
-            background: #10B981;
-            border-radius: 2px;
+            background: var(--accent-color);
+            margin-bottom: 30px;
         }
 
-        .summary-section {
-            margin-top: 30px;
-            padding: 25px;
-            background-color: #f9fafb;
-            border-radius: 8px;
-            border-left: 4px solid #10B981;
-        }
-
-        .summary-section p {
-            color: #4b5563;
-            font-size: 15px;
-            line-height: 1.8;
+        .summary {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: justify;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--code-bg);
+            border-left: 3px solid var(--accent-color);
         }
 
         .section {
-            margin-top: 50px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #1a1a1a;
-        }
-
-        .section-icon {
-            width: 45px;
-            height: 45px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #10B981;
-            font-size: 20px;
-        }
-
-        .timeline {
-            position: relative;
+            font-size: 1.4em;
+            font-weight: normal;
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            letter-spacing: 0.03em;
         }
 
         .entry {
-            margin-bottom: 40px;
-            padding-left: 35px;
-            position: relative;
+            margin-bottom: 25px;
         }
 
-        .entry::before {
-            content: '';
-            width: 14px;
-            height: 14px;
-            background-color: #10B981;
-            border-radius: 50%;
-            position: absolute;
-            left: 0;
-            top: 5px;
-            box-shadow: 0 0 0 4px #f0fdf4;
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 5px;
         }
 
         .entry h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1a1a1a;
+            font-size: 1.1em;
+            font-weight: bold;
         }
 
         .entry .period {
-            color: #10B981;
-            font-size: 14px;
-            margin-bottom: 12px;
-            font-weight: 500;
+            font-style: italic;
+            color: var(--accent-color);
+            font-size: 0.9em;
+        }
+
+        .entry .company {
+            color: var(--accent-color);
+            font-size: 0.95em;
+            margin-bottom: 5px;
         }
 
         .entry .location {
-            color: #666666;
-            font-size: 13px;
-            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+            margin-bottom: 8px;
         }
 
         .entry .description {
-            color: #4b5563;
-            font-size: 15px;
-            line-height: 1.7;
+            text-align: justify;
+            color: var(--text-muted);
+            font-size: 0.95em;
         }
 
-        .skills-section {
-            margin-top: 50px;
-        }
-
-        .skills-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 35px;
-            color: #1a1a1a;
-        }
-
-        .skill-category {
-            margin-bottom: 35px;
-        }
-
-        .skill-category-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #10B981;
+        .education-entry {
             margin-bottom: 15px;
         }
 
-        .skill-tags {
+        .education-entry h3 {
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .education-entry .degree {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95em;
+        }
+
+        .skills-category {
+            margin-bottom: 18px;
+        }
+
+        .skills-category h4 {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 6px;
         }
 
         .skill-tag {
-            background-color: #f9f9f9;
-            color: #333333;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            border: 1px solid #e5e5e5;
-            transition: all 0.3s;
+            background: var(--code-bg);
+            padding: 3px 10px;
+            font-size: 0.85em;
         }
 
-        .skill-tag:hover {
-            background-color: #10B981;
-            color: #ffffff;
-            border-color: #10B981;
-        }
-
-        .certifications-list {
+        .cert-list {
             list-style: none;
         }
 
-        .certifications-list li {
-            padding-left: 35px;
+        .cert-list li {
+            padding-left: 18px;
             position: relative;
-            margin-bottom: 20px;
-            color: #4b5563;
-            font-size: 15px;
-            line-height: 1.6;
+            margin-bottom: 8px;
+            font-size: 0.95em;
         }
 
-        .certifications-list li::before {
-            content: '';
-            width: 10px;
-            height: 10px;
-            background-color: #10B981;
-            border-radius: 50%;
+        .cert-list li::before {
+            content: '\2022';
             position: absolute;
             left: 0;
-            top: 7px;
+            color: var(--accent-color);
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 900px) {
             .container {
                 flex-direction: column;
             }
 
             .sidebar {
                 width: 100%;
+            }
+
+            .sidebar-card {
                 position: relative;
                 top: 0;
             }
 
             .main-content {
-                padding: 40px 30px;
+                padding: 30px 25px;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             body {
                 padding: 10px;
             }
 
-            .main-content {
-                padding: 30px 20px;
-            }
-
-            .page-title {
-                font-size: 28px;
-            }
-
-            .section-title {
-                font-size: 22px;
+            .entry-header {
+                flex-direction: column;
+                gap: 2px;
             }
         }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <i class="fas fa-adjust"></i>
+    </button>
+
     <div class="container">
         <aside class="sidebar">
-            <div class="profile-pic">
-                
-                👨
-                
-            </div>
-            <h1 class="name">Rajdeep Rai</h1>
-            <p class="role">Site Reliability Engineer (SRE)</p>
-            
-            <div class="divider"></div>
-            
-            <div class="contact-info">
+            <div class="sidebar-card">
+                <div class="profile-pic">
+                    
+                    👨
+                    
+                </div>
+                <h1 class="name">Rajdeep Rai</h1>
+                <p class="role">Site Reliability Engineer (SRE)</p>
+
+                <div class="divider"></div>
+
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <div class="contact-item-content">
-                        <span class="label">EMAIL</span>
+                    <div>
+                        <span class="label">Email</span>
                         <div class="value">rajdyp@icloud.com</div>
                     </div>
                 </div>
-                
+
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <div class="contact-item-content">
-                        <span class="label">LOCATION</span>
+                    <div>
+                        <span class="label">Location</span>
                         <div class="value">Santa Clara, CA (USA)</div>
                     </div>
                 </div>
-            </div>
 
-            <div class="divider"></div>
+                <div class="divider"></div>
 
-            <div class="social-links">
-                
-                
-                
-                
-                <a href="https://www.linkedin.com/in/rajdyprai" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                
+                <div class="social-links">
+                    
+                    <a href="https://www.linkedin.com/in/rajdyprai" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    
+                    
+                    <a href="https://github.com/rajdyp" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    
+                    
+                </div>
             </div>
         </aside>
 
         <main class="main-content">
             <h1 class="page-title">Resume</h1>
+            <div class="title-underline"></div>
 
             
-            <div class="summary-section">
-                <p>Site Reliability Engineer with experience in cloud-native migrations, distributed systems automation, and platform reliability. Proven track record in Kubernetes, AWS, and observability tooling to ensure system resiliency and performance at scale.</p>
+            <div class="summary">
+                Site Reliability Engineer with experience in cloud-native migrations, distributed systems automation, and platform reliability. Proven track record in Kubernetes, AWS, and observability tooling to ensure system resiliency and performance at scale.
             </div>
             
 
             <section class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-briefcase section-icon"></i>
-                    Experience
-                </h2>
+                <h2 class="section-title">Experience</h2>
                 
-                <div class="timeline">
-                    
-                    <div class="entry">
+                <div class="entry">
+                    <div class="entry-header">
                         <h3>Site Reliability Engineer, Apple Pay</h3>
-                        <p class="period">Apple (Contractor through TCS) | Jul 2022 - Present</p>
-                        
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Cupertino, CA</p>
-                        
-                        <p class="description">In this role, I oversee the migration of Apple Pay services to the cloud, ensuring seamless integration with existing Apple services. Implement observability best practices by designing dashboards, alerts, and automated workflows, minimizing service disruptions and operational overhead. Partner with cross-functional teams to develop standardized onboarding processes, accelerating future migration initiatives. Additionally, led operational readiness and reliability for Apple Pay's expansion to third-party browsers, expanding user accessibility.</p>
+                        <span class="period">Jul 2022 - Present</span>
                     </div>
+                    <p class="company">Apple (Contractor through TCS)</p>
                     
-                    <div class="entry">
-                        <h3>Site Reliability Engineer, Apple Maps</h3>
-                        <p class="period">Apple (Contractor through TCS) | Jan 2020 - Jul 2022</p>
-                        
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Sunnyvale, CA</p>
-                        
-                        <p class="description">Serving as an SRE for Apple Maps, I built and managed large-scale distributed data platforms utilizing Kafka, Zookeeper, Elasticsearch, and Redis. My responsibilities focused on maintaining high platform availability through proactive monitoring, automated failover systems, and zero-downtime platform upgrades. Additionally, automated infrastructure provisioning and configuration using Ansible, reducing manual effort and configuration errors in large-scale Linux environments.</p>
-                    </div>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Cupertino, CA</p>
                     
-                    <div class="entry">
-                        <h3>Application Support Lead</h3>
-                        <p class="period">AT&T (Contractor through Tech Mahindra) | Mar 2019 - Jan 2020</p>
-                        
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> St. Louis, MO</p>
-                        
-                        <p class="description">As the Application Support Lead, I led a support team that maintained operational excellence for over 40 critical business applications, implementing comprehensive monitoring and alerting to ensure high availability. This role involved partnering with development teams to drive incident response and root cause analysis while streamlining release cycles to improve service reliability. Additionally, developed disaster recovery procedures and conducted failover testing to ensure business continuity and minimize service downtime.</p>
-                    </div>
-                    
-                    <div class="entry">
-                        <h3>Sr. Linux System Administrator</h3>
-                        <p class="period">Tech Mahindra Ltd. (Client AT&T) | Jan 2011 - Mar 2019</p>
-                        
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Noida, India</p>
-                        
-                        <p class="description">In this position, I deployed and maintained Linux-based systems across AT&T data centers, prioritizing security, availability, and performance. My responsibilities included managing bare-metal servers, virtual machines in private cloud environments, coordinating OS patching and firmware upgrades, and specializing in high-availability setups with Veritas InfoScale. This approach ensured a robust, scalable, and fully optimized operating environment.</p>
-                    </div>
-                    
+                    <p class="description">In this role, I oversee the migration of Apple Pay services to the cloud, ensuring seamless integration with existing Apple services. Implement observability best practices by designing dashboards, alerts, and automated workflows, minimizing service disruptions and operational overhead. Partner with cross-functional teams to develop standardized onboarding processes, accelerating future migration initiatives. Additionally, led operational readiness and reliability for Apple Pay's expansion to third-party browsers, expanding user accessibility.</p>
                 </div>
+                
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Site Reliability Engineer, Apple Maps</h3>
+                        <span class="period">Jan 2020 - Jul 2022</span>
+                    </div>
+                    <p class="company">Apple (Contractor through TCS)</p>
+                    
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Sunnyvale, CA</p>
+                    
+                    <p class="description">Serving as an SRE for Apple Maps, I built and managed large-scale distributed data platforms utilizing Kafka, Zookeeper, Elasticsearch, and Redis. My responsibilities focused on maintaining high platform availability through proactive monitoring, automated failover systems, and zero-downtime platform upgrades. Additionally, automated infrastructure provisioning and configuration using Ansible, reducing manual effort and configuration errors in large-scale Linux environments.</p>
+                </div>
+                
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Application Support Lead</h3>
+                        <span class="period">Mar 2019 - Jan 2020</span>
+                    </div>
+                    <p class="company">AT&T (Contractor through Tech Mahindra)</p>
+                    
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> St. Louis, MO</p>
+                    
+                    <p class="description">As the Application Support Lead, I led a support team that maintained operational excellence for over 40 critical business applications, implementing comprehensive monitoring and alerting to ensure high availability. This role involved partnering with development teams to drive incident response and root cause analysis while streamlining release cycles to improve service reliability. Additionally, developed disaster recovery procedures and conducted failover testing to ensure business continuity and minimize service downtime.</p>
+                </div>
+                
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Sr. Linux System Administrator</h3>
+                        <span class="period">Jan 2011 - Mar 2019</span>
+                    </div>
+                    <p class="company">Tech Mahindra Ltd. (Client AT&T)</p>
+                    
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Noida, India</p>
+                    
+                    <p class="description">In this position, I deployed and maintained Linux-based systems across AT&T data centers, prioritizing security, availability, and performance. My responsibilities included managing bare-metal servers, virtual machines in private cloud environments, coordinating OS patching and firmware upgrades, and specializing in high-availability setups with Veritas InfoScale. This approach ensured a robust, scalable, and fully optimized operating environment.</p>
+                </div>
+                
             </section>
 
             <section class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-graduation-cap section-icon"></i>
-                    Education
-                </h2>
+                <h2 class="section-title">Education</h2>
                 
-                <div class="timeline">
-                    
-                    <div class="entry">
-                        <h3>Sikkim Manipal University</h3>
-                        <p class="period">Master of Computer Applications (MCA)</p>
-                    </div>
-                    
-                    <div class="entry">
-                        <h3>Kuvempu University</h3>
-                        <p class="period">Bachelor of Science (BSc) in Information Technology</p>
-                    </div>
-                    
-                    <div class="entry">
-                        <h3>NIIT, New Delhi</h3>
-                        <p class="period">GNIIT program in Software Engineering</p>
-                    </div>
-                    
+                <div class="education-entry">
+                    <h3>Sikkim Manipal University</h3>
+                    <p class="degree">Master of Computer Applications (MCA)</p>
                 </div>
+                
+                <div class="education-entry">
+                    <h3>Kuvempu University</h3>
+                    <p class="degree">Bachelor of Science (BSc) in Information Technology</p>
+                </div>
+                
+                <div class="education-entry">
+                    <h3>NIIT, New Delhi</h3>
+                    <p class="degree">GNIIT program in Software Engineering</p>
+                </div>
+                
             </section>
 
             
-            <section class="skills-section">
-                <h2 class="section-title">
-                    <i class="fas fa-code section-icon"></i>
-                    Technical Skills
-                </h2>
+            <section class="section">
+                <h2 class="section-title">Technical Skills</h2>
+
                 
-                
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Cloud & Infrastructure</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>Cloud & Infrastructure</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">Kubernetes</span>
                         
@@ -523,9 +505,9 @@
                 
 
                 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Programming & Scripting</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>Programming & Scripting</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">Python</span>
                         
@@ -536,9 +518,9 @@
                 
 
                 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Monitoring & Observability</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>Monitoring & Observability</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">OpenTelemetry</span>
                         
@@ -555,9 +537,9 @@
                 
 
                 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Data Platforms</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>Data Platforms</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">Kafka</span>
                         
@@ -572,9 +554,9 @@
                 
 
                 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">DevOps & CI/CD</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>DevOps & CI/CD</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">Git</span>
                         
@@ -591,9 +573,9 @@
                 
 
                 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">AI Development Tools</h3>
-                    <div class="skill-tags">
+                <div class="skills-category">
+                    <h4>AI Development Tools</h4>
+                    <div class="skill-list">
                         
                         <span class="skill-tag">Claude Code</span>
                         
@@ -607,12 +589,8 @@
 
             
             <section class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-certificate section-icon"></i>
-                    Professional Certifications
-                </h2>
-                
-                <ul class="certifications-list">
+                <h2 class="section-title">Certifications</h2>
+                <ul class="cert-list">
                     
                     <li>AWS Certified Solutions Architect - Associate</li>
                     
@@ -627,5 +605,20 @@
             
         </main>
     </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+    </script>
 </body>
 </html>
